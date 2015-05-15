@@ -1,10 +1,10 @@
 {
-  "title": "RingCloud-X",
+  "title": "RingCloud-ESXi",
   "services": {
     "query": {
       "list": {
         "0": {
-          "query": "",
+          "query": "*",
           "alias": "",
           "color": "#7EB26D",
           "id": 0,
@@ -38,13 +38,13 @@
   "rows": [
     {
       "title": "Graph",
-      "height": "175px",
+      "height": "350px",
       "editable": true,
       "collapse": false,
       "collapsable": true,
       "panels": [
         {
-          "span": 12,
+          "span": 8,
           "editable": true,
           "group": [
             "default"
@@ -57,7 +57,7 @@
           "resolution": 100,
           "interval": "10m",
           "fill": 3,
-          "linewidth": 2,
+          "linewidth": 3,
           "timezone": "browser",
           "spyable": true,
           "zoomlinks": true,
@@ -71,7 +71,7 @@
           "percentage": false,
           "interactive": true,
           "queries": {
-            "mode": "selected",
+            "mode": "all",
             "ids": [
               0
             ]
@@ -94,7 +94,7 @@
           ],
           "options": true,
           "tooltip": {
-            "value_type": "cumulative",
+            "value_type": "individual",
             "query_as_alias": true
           },
           "scale": 1,
@@ -117,8 +117,7 @@
           "show_query": true,
           "legend_counts": true,
           "zerofill": true,
-          "derivative": false,
-          "scaleSeconds": false
+          "derivative": false
         },
         {
           "error": false,
@@ -126,7 +125,7 @@
           "editable": true,
           "type": "terms",
           "loadingEditor": false,
-          "field": "message_service",
+          "field": "VM",
           "exclude": [],
           "missing": false,
           "other": false,
@@ -151,7 +150,7 @@
           "tmode": "terms",
           "tstat": "total",
           "valuefield": "",
-          "title": "Top Processes"
+          "title": "Vm event"
         },
         {
           "error": false,
@@ -159,13 +158,11 @@
           "editable": true,
           "type": "terms",
           "loadingEditor": false,
-          "field": "vCenter",
-          "exclude": [
-            ""
-          ],
+          "field": "hostname",
+          "exclude": [],
           "missing": false,
           "other": false,
-          "size": 12,
+          "size": 10,
           "order": "count",
           "style": {
             "font-size": "10pt"
@@ -186,7 +183,7 @@
           "tmode": "terms",
           "tstat": "total",
           "valuefield": "",
-          "title": "Top vCenter"
+          "title": "esxi"
         },
         {
           "error": false,
@@ -219,7 +216,40 @@
           "tmode": "terms",
           "tstat": "total",
           "valuefield": "",
-          "title": "Syslog Level"
+          "title": "esxi_log_level"
+        },
+        {
+          "error": false,
+          "span": 4,
+          "editable": true,
+          "type": "terms",
+          "loadingEditor": false,
+          "field": "program",
+          "exclude": [],
+          "missing": false,
+          "other": false,
+          "size": 10,
+          "order": "count",
+          "style": {
+            "font-size": "10pt"
+          },
+          "donut": false,
+          "tilt": false,
+          "labels": true,
+          "arrangement": "horizontal",
+          "chart": "pie",
+          "counter_pos": "above",
+          "spyable": true,
+          "queries": {
+            "mode": "all",
+            "ids": [
+              0
+            ]
+          },
+          "tmode": "terms",
+          "tstat": "total",
+          "valuefield": "",
+          "title": "esxi_process"
         }
       ],
       "notice": false
@@ -244,17 +274,17 @@
           "pages": 5,
           "offset": 0,
           "sort": [
-            "@timestamp",
+            "syslog_timestamp",
             "desc"
           ],
           "style": {
-            "font-size": "9pt"
+            "font-size": "12pt"
           },
           "overflow": "min-height",
           "fields": [
             "@timestamp",
-            "vCenter",
-            "syslog_level",
+            "hostname",
+            "ESXi_level",
             "message-syslog"
           ],
           "localTime": true,
@@ -274,7 +304,7 @@
           "status": "Stable",
           "trimFactor": 300,
           "normTimes": true,
-          "all_fields": false
+          "all_fields": true
         }
       ],
       "notice": false
@@ -297,24 +327,13 @@
       "notice": false,
       "query": "*",
       "pinned": true,
-      "history": [
-        "",
-        "*snapshot",
-        "*BXVAV0000617",
-        "*",
-        "tags:VMware",
-        "tag:VMware",
-        "type:VMware",
-        "host:\"esxi01.everythingshouldbevirtual.local\"",
-        "host:\"esxi02.everythingshouldbevirtual.local\"",
-        "host:\"esxi03.everythingshouldbevirtual.local\""
-      ],
+      "history": [],
       "remember": 10,
       "enable": true
     },
     {
       "type": "filtering",
-      "collapse": true,
+      "collapse": false,
       "notice": true,
       "enable": true
     }
@@ -368,5 +387,5 @@
     "load_local": true,
     "hide": false
   },
-  "refresh": "10s"
+  "refresh": false
 }
