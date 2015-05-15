@@ -1,0 +1,20 @@
+# Use ELK for vSphere
+
+dshkwnds@163.com
+
+----Config ELK----
+关闭iptables，selinux，修改系统打开文件最大数为65535
+1.安装kibana
+2.安装elasticsearch集群，修改jvm heap 为系统内存一半，启动服务
+3.安装logstash index节点，使用配置文件logstash.conf，启动服务
+4.安装logstash shipper节点，替换系统自带的rsyslog.conf，启动ryslog服务，使用配置文件logstash_syslog.conf启动服务
+5.使用浏览器打开kibana服务器地址，导入vSphere dashboard
+
+# Config vSphere
+------ESXi-------
+1.使用set syslog.ps1配置ESXi服务器地址，需要安装powercli
+
+------vCenter-----
+1.安装nxlog客户端到vCenter，参考nxlog.conf修改配置文件，需要修改syslog地址设置nxlog服务为自动，启动服务
+
+
